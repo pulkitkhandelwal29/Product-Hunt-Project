@@ -4,6 +4,14 @@
 
 <h1>Sign Up!</h1>
 
+<!--This is checking if there is any error returned from views.py, then display it-->
+{% if error %}
+{{ error }}
+{% endif %}
+
+<br>
+<br>
+
 <form method="POST" action="{% url 'signup' %}">
 <!--csrf token, to get protected against different types of attackes-->
 {% csrf_token %}
@@ -16,7 +24,7 @@ Password:
 <br>
 Confirm Password:
 <br>
-<input type="text" name="password2">
+<input type="password" name="password2">
 <br><br>
 <input class="btn btn-primary" type="submit" value="Sign Up!">
 
