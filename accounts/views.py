@@ -16,9 +16,9 @@ def signup(request):
                 return render(request,'accounts/signup.html',{'error':'Username already exists'})
             #if the usernames does not exist, we will create a user
             except User.DoesNotExist:
-                #Creating user
-                user = User.objects.create_user(request.POST['username'],request.POST['password1'])
-                #Particular user being registered
+                #Creating user with particular username and password
+                user = User.objects.create_user(username=request.POST['username'],password=request.POST['password1'])
+                #Particular user being registered and logged in and redirecting to home page
                 auth.login(request,user)
                 #If the user has signed up, redirect it to the homepage(need to import redirect)
                 return redirect('home')
@@ -29,7 +29,20 @@ def signup(request):
         return render(request,'accounts/signup.html')
 
 def login(request):
-    return render(request,'accounts/login.html')
+    if request.method =='POST':
+        #Now authenticating the details received and saving the value to variable
+        user = auth.authenticate(username=request.POST['username'],password=request.POST['password'])
+        #if the user exists, then login
+        if user is not None:
+            auth.login(request, user)
+            return redirect('home')
+        else:
+            return render(request,'accounts/login.html',{'error':'Username/Password is incorrect'})
+    else:
+        return render(request,'accounts/login.html')
 
 def logout(request):
-    return render(request,'accounts/signup.html')
+    if request.method=='POST':
+        #helps to logout
+        auth.logout(request)
+        return redirect('home')
