@@ -2,13 +2,15 @@
 
 {% block content %}
 
+<br>
 <!--This is checking if there is any error returned from views.py, then display it-->
 {% if error %}
-{{ error }}
+<font size="4" color="red">{{ error }}</font>
 {% endif %}
-
 <br>
-<h1>Create</h1>
+<br>
+
+<h1>Create Product</h1>
 
 <form method="POST" action="{% url 'create' %}" enctype="multipart/form-data">
   <!--csrf token, to get protected against different types of attackes-->
@@ -34,7 +36,7 @@
   <br>
   <br>
   <input class="btn btn-primary" type="submit" value="Add Product!">
-<!--For pub_date, we will take automatically and votes_total and hunter also-->
+  <!--For pub_date, we will take automatically and votes_total and hunter also-->
 </form>
 
 {% endblock %}

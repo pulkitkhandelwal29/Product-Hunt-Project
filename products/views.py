@@ -66,7 +66,8 @@ def detail(request,product_id):
 
 
 #function for Upvote
-@login_required
+#This will require login, and if it is not login, will redirect to login page
+@login_required(login_url='/accounts/login')
 def upvote(request,product_id):
     if request.method == 'POST':
         product=get_object_or_404(Product,pk = product_id)

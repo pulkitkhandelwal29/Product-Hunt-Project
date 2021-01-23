@@ -2,31 +2,32 @@
 
 {% block content %}
 
-<h1>Sign Up!</h1>
-
+<br>
 <!--This is checking if there is any error returned from views.py, then display it-->
 {% if error %}
-{{ error }}
+<font size="4" color="red">{{ error }}</font>
 {% endif %}
+<br>
+<br>
 
-<br>
-<br>
+
+<h1>Sign Up!</h1>
 
 <form method="POST" action="{% url 'signup' %}">
-<!--csrf token, to get protected against different types of attackes-->
-{% csrf_token %}
-Username:
-<br><input type="text" name="username">
-<br>
-Password:
-<br>
-<input type="password" name="password1">
-<br>
-Confirm Password:
-<br>
-<input type="password" name="password2">
-<br><br>
-<input class="btn btn-primary" type="submit" value="Sign Up!">
+  <!--csrf token, to get protected against different types of attackes-->
+  {% csrf_token %}
+  Username:
+  <br><input type="text" name="username">
+  <br>
+  Password:
+  <br>
+  <input type="password" name="password1">
+  <br>
+  Confirm Password:
+  <br>
+  <input type="password" name="password2">
+  <br><br>
+  <input class="btn btn-primary" type="submit" value="Sign Up!">
 
 </form>
 
