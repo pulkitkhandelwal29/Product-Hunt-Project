@@ -133,3 +133,10 @@ STATIC_ROOT = os.path.join(BASE_DIR,'static')
 STATICFILES_DIRS= [
     os.path.join(BASE_DIR,'producthunt/static')
 ]
+
+
+#Media FILES
+MEDIA_URL = '/media/'
+
+#This will create the media folder and will access everything from this directory
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')

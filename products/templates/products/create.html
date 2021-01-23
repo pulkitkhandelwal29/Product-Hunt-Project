@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!--This is checking if there is any error returned from views.py, then display it-->
+{% if error %}
+{{ error }}
+{% endif %}
+
+<br>
+<h1>Create</h1>
+
+<form method="POST" action="{% url 'create' %}" enctype="multipart/form-data">
+  <!--csrf token, to get protected against different types of attackes-->
+  {% csrf_token %}
+  Title:
+  <br><input type="text" name="title">
+  <br>
+  Body:
+  <br>
+  <input type="text" name="body">
+  <br>
+  URL:
+  <br>
+  <input type="textbox" name="url">
+  <br>
+  Icon:
+  <br>
+  <input type="file" name="icon">
+  <br>
+  Image:
+  <br>
+  <input type="file" name="image">
+  <br>
+  <br>
+  <input class="btn btn-primary" type="submit" value="Add Product!">
+<!--For pub_date, we will take automatically and votes_total and hunter also-->
+</form>
+
+{% endblock %}
