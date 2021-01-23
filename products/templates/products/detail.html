@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<br>
+<!-- Bootstrap allows to divide the page into rows and columns(are 12)-->
+<!-- taking first row and divide that into 2 columns and 10 columns-->
+<div class= "row">
+  <div class="col-2">
+    <img src="{{ product.icon.url }}" class="img-fluid">
+  </div>
+  <div class="col-10">
+    <a href="{{ product.url }}" class="link-primary"><h1>{{ product.title }}</h1></a>
+  </div>
+</div>
+
+<br><br>
+
+<!--Again taking another row for bigger picture and upvode button-->
+<div class= "row">
+  <div class="col-8">
+    <img src="{{ product.image.url }}" class="img-fluid">
+  </div>
+  <div class="col-4">
+    <!--will execute the hidden form which helps in working of upvote-->
+    <a href="javascript:{document.getElementById('upvote').submit()}">
+      <button class="btn btn-outline-primary btn-lg">
+        <span class="oi oi-caret-top"></span>  Upvote {{ product.votes_total }}
+      </button>
+    </a>
+  </div>
+</div>
+
+<!--Again taking another row but this time we want text just in col 8 portion where the image is-->
+<div class= "row">
+  <div class="col-4">
+    <h4>Hunted by {{product.hunter.username }}</h4>
+  </div>
+  <div class="col-4" align="right">
+    <h4>{{ product.pub_date_pretty }}</h4>
+  </div>
+</div>
+
+<br>
+<!--Again taking another row for body-->
+<div class= "row">
+  <div class="col-8">
+    <p>{{product.body }}</p>
+  </div>
+</div>
+
+<!--hidden form for upvote to work-->
+<!--action to "upvote" url and to which product is determined by product.id-->
+<form id="upvote" method="POST" action="{% url 'upvote' product.id %}">
+  {% csrf_token %}
+  <input type="hidden">
+</form>
+
+{% endblock %}

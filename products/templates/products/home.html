@@ -1,5 +1,34 @@
 {% extends 'base.html' %}
 
 {% block content %}
-Hello homepage
+
+{% for product in products.all %}
+<!--pb-4 (padding bottom) adds space between each row-->
+<div class="row pb-4 pt-3">
+  <!--window location helps to move to specific url and style of css helps change the pointer-->
+  <div class="col-2" onclick="window.location='{% url 'detail' product.id %}';" style="cursor:pointer">
+    <img src="{{ product.icon.url }}" class="img-fluid">
+  </div>
+  <div class="col-6" onclick="window.location='{% url 'detail' product.id %}';" style="cursor:pointer">
+    <h1>{{ product.title }} </h1>
+    <p>{{ product.summary }} </p>
+  </div>
+  <div class="col-4">
+    <a href="javascript:{document.getElementById('upvote{{ product.id }}').submit()}">
+      <button class="btn btn-outline-primary btn-lg">
+        <span class="oi oi-caret-top"></span>  Upvote {{ product.votes_total }}
+      </button>
+    </a>
+  </div>
+
+</div>
+
+<!--Creating separate form id for every upvote i.e. we included product id in the form id to make it unique-->
+<form id="upvote{{ product.id }}" method="POST" action="{% url 'upvote' product.id %}">
+  {% csrf_token %}
+  <input type="hidden">
+</form>
+
+{% endfor %}
+
 {% endblock %}
