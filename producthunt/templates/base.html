@@ -16,6 +16,8 @@
   <!-- Bootstrap core CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
+  <!--Reference to open-iconic for icon-->
+  <link href="{% static 'open-iconic/font/css/open-iconic-bootstrap.css' %}" rel="stylesheet">
 
 
 
@@ -56,6 +58,8 @@
 
             <!--Checking if the user is authenticated then we will only show logout, otherwise signup/login-->
             {% if user.is_authenticated %}
+            <!--Providing an icon to add new product if the user is logged in (icon from iconc free website and it contains some static files as well in the static folder and its reference is given in this webpage)-->
+            <a class="nav-link" href="{% url 'create' %}"><span class="oi oi-plus"></span></a>
             <!--Will need to create small form so that hidden id is passed-->
             <a class="nav-link" href="javascript:{document.getElementById('logout').submit()}">Logout</a>
             <form id="logout" method="POST" action="{% url 'logout' %}">
