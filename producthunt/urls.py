@@ -14,7 +14,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #for the homepage
+    #for the homepage (directly taking from Products views)
     path('',views.home,name='home'),
     #include the urls.py of accounts app
     path('accounts/',include('accounts.urls')),
